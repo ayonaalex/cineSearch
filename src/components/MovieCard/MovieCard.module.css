@@ -16,6 +16,9 @@
 .responsiveImage {
   object-fit: cover;
 }
+.link{
+  text-decoration: none;
+}
 
 .heading {
   display: flex;
