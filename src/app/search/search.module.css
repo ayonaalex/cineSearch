@@ -1,9 +1,13 @@
-.pageWrapper{
+.pageWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 15px;  
+  gap: 15px;
+}
+
+.movieContainer {
+  height: 400px;
 }
 
 .searchWrapper {
