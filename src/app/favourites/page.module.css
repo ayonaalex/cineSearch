@@ -1,0 +1,23 @@
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.listWrapper{
+    display: flex;
+    gap: 60px;
+    font-size: 30px;
+    font-weight: 600;
+    font-style: normal;  
+    margin-top: 40px;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.title{
+    width: 100%;
+}
+
