@@ -1,17 +1,33 @@
-import Image from "next/image";
 import styles from "./page.module.css";
-import MovieList from "@/components/list";
-import SearchPage from "./search/page";
-import SearchMoviesInput from "./search/search-movies-input";
+import Slider from "@/components/Slider/index";
+import Recommendations from "@/components/Recommendations";
 
-export default function Home() {
+async function fetchMovies(apiKey: string) {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&include_adult=false`,
+    { next: { revalidate: 3600 } } // Revalidate every hour
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  const data = await res.json();
+  return data.results;
+}
+
+export default async function Home() {
+  const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
+  let initialMovies = [];
+
+  try {
+    initialMovies = await fetchMovies(apiKey);
+  } catch (error) {
+    console.error("Failed to fetch movies:", error);
+  }
+
   return (
     <div className={styles.page}>
-      <main className={styles.main}>
-        <ol>
-          <MovieList />
-        </ol>
-      </main>
+      <Slider />
+      <Recommendations />
     </div>
   );
 }
