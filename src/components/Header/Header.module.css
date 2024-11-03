@@ -1,0 +1,54 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 4px;
+  height: 70px;
+}
+
+.contentWrapper {
+  display: flex;
+  gap: 40px;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 900;
+  font-style: normal;
+  color: var(--netflixRed);
+}
+
+.navigationBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--lightGrey);
+  gap: 30px;
+}
+
+@media (max-width: 900px) {
+  .header {
+    height: 120px;
+    align-items: flex-start;
+    
+  }
+
+  .contentWrapper {
+    flex-wrap: wrap;
+    min-width: 40%;
+
+  }
+  .title {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .title {
+    font-size: 24px;
+    margin-top: 6px;
+  }
+}
