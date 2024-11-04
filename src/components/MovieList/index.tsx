@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import MovieCard from "../../components/MovieCard/index";
 import styles from "./Movielist.module.css";
 import { FaChevronLeft, FaChevronRight, FaRegStar } from "react-icons/fa";
-import Link from "next/link";
 
 interface Movie {
   id: number;
