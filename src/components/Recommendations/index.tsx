@@ -18,7 +18,7 @@ export default function Recommendations() {
     fetcher
   );
 
-  const movies = data?.results.slice(0, 40);
+  const movies = data ? data?.results : [];
 
   return <MovieList initialMovies={movies} title="Recommendations" />;
 }

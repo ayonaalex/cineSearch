@@ -12,42 +12,39 @@ interface Movie {
 }
 
 export default function MovieList({
-  initialMovies,
+  initialMovies = [],
   title,
 }: {
-  initialMovies: Movie[];
+  initialMovies?: Movie[];
   title: string;
 }) {
   const [currentPage, setCurrentPage] = useState(0);
   const moviesPerPage = 6;
 
-  const totalPages = Math.ceil(initialMovies?.length / moviesPerPage);
+  const totalMovies = initialMovies?.length;
+  const totalPages = Math.ceil(totalMovies / moviesPerPage);
 
   const handleNext = () => {
-    if (currentPage < totalPages - 1) {
-      setCurrentPage((prev) => prev + 1);
-    }
+    setCurrentPage((prev) => (prev + 1) % totalPages);
   };
 
   const handlePrevious = () => {
-    if (currentPage > 0) {
-      setCurrentPage((prev) => prev - 1);
-    }
+    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
   };
 
-  const displayedMovies = initialMovies?.slice(
+  const displayedMovies = [...initialMovies, ...initialMovies].slice(
     currentPage * moviesPerPage,
     (currentPage + 1) * moviesPerPage
   );
 
   return (
     <div className={styles.wraper}>
-      <div className={styles.title}> {title}</div>
+      <div className={styles.title}>{title}</div>
       <div className={styles.carouselWrapper}>
         <button
           className={styles.arrowButton}
           onClick={handlePrevious}
-          disabled={currentPage === 0}>
+          disabled={totalPages === 1}>
           <FaChevronLeft />
         </button>
         <div className={styles.listWrapper}>
@@ -58,7 +55,7 @@ export default function MovieList({
         <button
           className={styles.arrowButton}
           onClick={handleNext}
-          disabled={currentPage === totalPages - 1}>
+          disabled={totalPages === 1}>
           <FaChevronRight />
         </button>
       </div>
