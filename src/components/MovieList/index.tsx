@@ -41,7 +41,7 @@ export default function MovieList({
   );
 
   return (
-    <>
+    <div className={styles.wraper}>
       <div className={styles.title}> {title}</div>
       <div className={styles.carouselWrapper}>
         <button
@@ -62,6 +62,6 @@ export default function MovieList({
           <FaChevronRight />
         </button>
       </div>
-    </>
+    </div>
   );
 }
