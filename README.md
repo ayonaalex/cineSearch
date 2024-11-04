@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This project is a Next.js application that allows users to search for movies, view detailed information, and manage a list of favorite movies. It demonstrates skills in Next.js, React, API integration, state management, and frontend development best practices.
 
-## Getting Started
+## Features
 
-First, run the development server:
+1. **Home Page**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+   - Home component is effectively set up to fetch data on the server such as Recommendations,topMovies and latest movies.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Search Movies**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   - Header on homepage had Search functionality for movie titles
+   - Display of search results with movie poster, title, release year, and rating
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Movie Details Page**
 
-## Learn More
+   - Detailed information about selected movies
 
-To learn more about Next.js, take a look at the following resources:
+4. **Favorite Movies**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   - Add/remove movies from favorites list
+   - Dedicated favorites page for management
+   - Client-side persistence of favorites
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+5. **Responsive Design**
 
-## Deploy on Vercel
+   - Fully responsive on mobile, tablet, and desktop devices
+   - Implemented using CSS modules
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+6. **State Management**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   - Utilizes Zustand for application state management
+
+7. **Routing**
+
+   - Next.js routing for navigation between pages
+
+8. **Error Handling and Loading States**
+
+   - User feedback during data fetching
+
+9. **Performance Optimization**
+   - Image optimization using Next.js Image component
+
+## Installation and Setup
+
+1. Clone the repository:
+   git clone https://github.com/ayonaalex/cinesearch.git
+
+2. Navigate to the project directory:
+   cd cinesearch
+
+3. Install dependencies using Bun:
+   bun install
+
+4.Create a `.env.local` file in the root directory and add your API key
+NEXT_PUBLIC_API_KEY=your_api_key_here
+
+if you dont have a registered apikey please login here https://www.themoviedb.org/
+
+5. Start the development server:
+   bun run dev
+
+6. Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
+
+## Design Decisions and Challenges
+
+### State Management
+
+- Implemented Zustand for state management due to its simplicity and performance
+- Created a custom store (useMovieStore) to handle:
+
+- Favorite movies management
+
+- Challenge: Persisting favorites across sessions
+
+- Solution: Utilized Zustand's persist middleware with localStorage
+
+### Component Architecture
+
+- Created reusable components:
+
+- MovieCard: Displays individual movie information
+- Slider: Auto-playing carousel for featured movies
+- FavoriteButton: Toggle for managing favorite movies
+
+- Challenge: Managing server and client components
+
+- Solution: Clearly separated server and client components using the 'use client' directive, used swr to fetch component depened data and used server components when the components doesn't have client interations as It can improve performance and reduce the JavaScript sent to the client.
+
+## Additional Features
+
+### Auto-playing Carousel
+
+- Implemented an auto-playing carousel for latest movies
+- Added hover pause functionality
+- Included manual navigation controls
+
+### Genre Filtering
+
+- Added genre-based movie filtering
+- Implemented server-side filtering for better performance
+- Created a clean URL structure for filtered results

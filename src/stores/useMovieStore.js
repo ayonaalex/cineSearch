@@ -32,28 +32,6 @@ export const useMovieStore = create(
           return { favorites: newFavorites };
         }),
 
-      handleGenreFilter: async (genreId
-        ) => {
-          try {
-            const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY; 
-            const response = await fetch(
-              `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=${genreId}`
-            );
-        
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-        
-            const data = await response.json();
-            console.log('genre',data)
-            
-            set((state) => ({
-              genre: data.results, 
-            }));
-          } catch (error) {
-            console.error('Error fetching movies:', error);
-          }
-        }, 
         handleLatest: async (genreId
           ) => {
             try {

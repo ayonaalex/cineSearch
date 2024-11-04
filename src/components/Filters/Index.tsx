@@ -26,8 +26,6 @@ const Filters = () => {
   const fetcher = (url) => fetch(url).then((res) => res.json());
   const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
-  const handleGenreFilter = useMovieStore((state) => state.handleGenreFilter);
-
   const { data, error } = useSWR(
     `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`,
     fetcher
