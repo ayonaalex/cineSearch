@@ -26,7 +26,7 @@ const FavoriteButton = ({ movie }: { movie: Movie }) => {
     <button onClick={handleClick} className={styles.favButton}>
       <FiHeart
         fill={isFavorite ? "red" : "none"}
-        color={isFavorite ? "red" : "red"}
+        className={`${styles.heartIcon} ${isFavorite ? styles.filled : ""}`}
       />
     </button>
   );
