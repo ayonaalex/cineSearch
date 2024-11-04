@@ -4,7 +4,7 @@ This project is a Next.js application that allows users to search for movies, vi
 
 1. **Home Page**
 
-   - Home component is effectively set up to fetch data on the server such as Recommendations,topMovies and latest movies.
+   - Homepage component is effectively set up to fetch data on the server such as Recommendations,topMovies and latest movies.
 
 2. **Search Movies**
 
