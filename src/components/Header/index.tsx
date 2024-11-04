@@ -3,6 +3,8 @@
 import styles from "./Header.module.css";
 import { FaCirclePlay } from "react-icons/fa6";
 import SearchMoviesInput from "@/app/search/search-movies-input";
+import Link from "next/link";
+import Filters from "../Filters/Index";
 
 const Header = () => {
   return (
@@ -14,10 +16,17 @@ const Header = () => {
           <FaCirclePlay size={18} fill={"#fff"} />k
         </div>
         <div className={styles.navigationBar}>
-          <div>Home</div>
-          <div>Movies</div>
-          <div>Series</div>
-          <div>Favorites</div>
+          <Link href={`/`} className={styles.link}>
+            Home
+          </Link>
+          <div>
+            <Link href={`/favourites/`} className={styles.link}>
+              Favorites
+            </Link>
+          </div>
+          <div>
+            <Filters />
+          </div>
         </div>
       </div>
       <div className={styles.searchWrapper}>
