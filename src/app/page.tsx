@@ -1,7 +1,6 @@
 import styles from "./page.module.css";
 import Slider from "@/components/Slider/index";
 import Recommendations from "@/components/Recommendations";
-import Filters from "@/components/Filters/Index";
 
 async function fetchMovies(apiKey: string) {
   const res = await fetch(
@@ -17,6 +16,12 @@ async function fetchMovies(apiKey: string) {
 
 export default async function Home() {
   const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
+  if (!apiKey) {
+    throw new Error(
+      "API key is missing. Please set NEXT_PUBLIC_TMDB_API_KEY in your environment variables."
+    );
+  }
+
   let initialMovies = [];
 
   try {

@@ -1,6 +1,6 @@
 "use server";
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
-export async function filterMovies(genre: string, page: number = 1) {
+export async function filterMovies(genre: string) {
   const res = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genre}`
   );

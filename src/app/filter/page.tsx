@@ -1,6 +1,11 @@
 import { filterMovies } from "./action";
 import MovieCard from "@/components/MovieCard";
 import styles from "../search/search.module.css";
+import { Movie } from "@/movie";
+
+interface SearchResults {
+  results: Movie[];
+}
 
 export default async function SearchPage({
   searchParams,
@@ -8,7 +13,7 @@ export default async function SearchPage({
   searchParams: { genre: string };
 }) {
   const genre = searchParams.genre ?? "";
-  const movies = genre ? await filterMovies(genre) : [];
+  const movies: SearchResults = genre ? await filterMovies(genre) : [];
 
   return (
     <div className={styles.pageWrapper}>

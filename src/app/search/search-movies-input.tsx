@@ -22,7 +22,7 @@ export default function SearchMoviesInput({
   }, 300);
 
   const createSearchURL = (term: string) => {
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams || "");
     if (term) {
       params.set("query", term);
     } else {
