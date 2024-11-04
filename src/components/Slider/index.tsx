@@ -10,7 +10,7 @@ const Slider = () => {
   const fetcher = (url) => fetch(url).then((res) => res.json());
   const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
-  const { data, error } = useSWR(
+  const { data, isLoading, error } = useSWR(
     `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`,
     fetcher
   );
@@ -35,6 +35,10 @@ const Slider = () => {
       return () => clearInterval(interval);
     }
   }, [isHovered]);
+
+  if (isLoading) {
+    return <div className={styles.loading}>Loading....</div>;
+  }
 
   return (
     <div

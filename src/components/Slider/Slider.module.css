@@ -10,6 +10,9 @@
   overflow: hidden;
   width: 100%;
 }
+.loading{
+  color: var(--netflixRed);
+}
 
 .link{
   text-decoration: none;
