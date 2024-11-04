@@ -2,8 +2,9 @@
 import useSWR from "swr";
 import React, { useState, useEffect } from "react";
 import styles from "./Slider.module.css";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaRegStar } from "react-icons/fa";
 import Image from "next/image";
+import Link from "next/link";
 
 const Slider = () => {
   const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -18,7 +19,6 @@ const Slider = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const totalPages = 5;
-  const screenWidth = window.innerWidth;
 
   const handleNext = () => {
     setCurrentPage((prev) => (prev + 1) % totalPages);
@@ -50,20 +50,29 @@ const Slider = () => {
       <div className={styles.sliderContainer}>
         <div className={styles.listWrapper}>
           {movies?.map((movie) => (
-            <div
-              className={styles.imageWrapper}
+            <Link
+              href={`/moviePage/${movie.id}`}
               key={movie.id}
-              style={{
-                transform: `translateX(-${currentPage * 100}%)`,
-              }}>
-              <Image
-                height={513}
-                width={342}
-                alt={movie.title || "Movie backdrop"}
-                className={styles.responsiveImage}
-                src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
-              />
-            </div>
+              className={styles.link}>
+              <div
+                className={styles.imageWrapper}
+                key={movie.id}
+                style={{
+                  transform: `translateX(-${currentPage * 100}%)`,
+                }}>
+                <Image
+                  height={513}
+                  width={342}
+                  alt={movie.title || "Movie backdrop"}
+                  className={styles.responsiveImage}
+                  src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
+                />
+                <div className={styles.titleCard}>
+                  Rating: {movie.vote_average.toFixed(2)}{" "}
+                  <FaRegStar size={13} />
+                </div>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
