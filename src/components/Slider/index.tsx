@@ -1,21 +1,12 @@
 "use client";
-import useSWR from "swr";
 import React, { useState, useEffect } from "react";
 import styles from "./Slider.module.css";
 import { FaChevronLeft, FaChevronRight, FaRegStar } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
+import { Movie } from "@/movie";
 
-const Slider = () => {
-  const fetcher = (url) => fetch(url).then((res) => res.json());
-  const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
-
-  const { data, isLoading, error } = useSWR(
-    `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`,
-    fetcher
-  );
-
-  let movies = data?.results;
+const Slider = ({ initialMovies }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const totalPages = 5;
@@ -36,10 +27,6 @@ const Slider = () => {
     }
   }, [isHovered]);
 
-  if (isLoading) {
-    return <div className={styles.loading}>Loading....</div>;
-  }
-
   return (
     <div
       className={styles.carouselWrapper}
@@ -53,7 +40,7 @@ const Slider = () => {
       </button>
       <div className={styles.sliderContainer}>
         <div className={styles.listWrapper}>
-          {movies?.map((movie) => (
+          {initialMovies?.map((movie) => (
             <Link
               href={`/moviePage/${movie.id}`}
               key={movie.id}

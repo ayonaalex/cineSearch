@@ -1,18 +1,7 @@
 import styles from "./page.module.css";
 import Slider from "@/components/Slider/index";
-import Recommendations from "@/components/Recommendations";
-
-async function fetchMovies(apiKey: string) {
-  const res = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&include_adult=false`,
-    { next: { revalidate: 3600 } } // Revalidate every hour
-  );
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  const data = await res.json();
-  return data.results;
-}
+import MovieList from "@/components/MovieList";
+import { fetchMovies, Recommendations, topMovies } from "./movieActions";
 
 export default async function Home() {
   const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
@@ -23,6 +12,8 @@ export default async function Home() {
   }
 
   let initialMovies = [];
+  let recommendedMovies = [];
+  let topRatedMovies = [];
 
   try {
     initialMovies = await fetchMovies(apiKey);
@@ -30,10 +21,28 @@ export default async function Home() {
     console.error("Failed to fetch movies:", error);
   }
 
+  try {
+    recommendedMovies = await Recommendations(apiKey);
+  } catch (error) {
+    console.error("Failed to recommended Movies :", error);
+  }
+
+  try {
+    topRatedMovies = await topMovies(apiKey);
+  } catch (error) {
+    console.error("Failed to topRatedMovies Movies :", error);
+  }
+
   return (
     <div className={styles.page}>
-      <Slider />
-      <Recommendations />
+      <Slider initialMovies={initialMovies} />
+      <div className={styles.movieCards}>
+        <MovieList
+          initialMovies={topRatedMovies}
+          title="Top Rated Movies Movies"
+        />
+      </div>
+      <MovieList initialMovies={recommendedMovies} title="Recommendations" />;
     </div>
   );
 }
