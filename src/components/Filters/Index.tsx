@@ -1,9 +1,10 @@
 "use client";
-import DropDown from "./dropDown";
+import DropDown from "../DropDown/index";
 import useSWR from "swr";
-import { useMovieStore } from "../stores/useMovieStore";
+import { useMovieStore } from "../../stores/useMovieStore";
 import React, { useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import styles from "./Filter.module.css";
 
 const Filters = () => {
   const [selectedGenreValue, setSelecteGenreValue] = useState("Genre");
@@ -33,8 +34,7 @@ const Filters = () => {
   );
 
   const searchParams = useSearchParams();
-  //   const [query, setQuery] = useState("");
-  const router = useRouter(); // Add useRouter to manage navigation
+  const router = useRouter();
 
   const createSearchURL = (term: string, query: string) => {
     const params = new URLSearchParams(searchParams);
@@ -43,43 +43,42 @@ const Filters = () => {
     } else {
       params.delete(`${query}`);
     }
-    return `/?${params.toString()}`;
+    return `/filter?${params.toString()}`;
   };
 
   const onGenreDropDownClick = (genre) => {
     if (genre.name == selectedGenreValue) {
       setSelecteGenreValue("Genre");
-      router.push(createSearchURL("", "genre"));
+      router.push("/");
     } else {
       setSelecteGenreValue(genre.name);
-      // handleGenreFilter(genre.id);
       router.push(createSearchURL(genre.id, "genre"));
     }
   };
 
-  const onRatingDropDownClick = (genre) => {
-    if (genre.name == selectedRatingValue) {
-      setSelecteRatingValue("Rating");
-      router.push(createSearchURL("", "rating"));
-    } else {
-      setSelecteRatingValue(genre.name);
-      router.push(createSearchURL(genre.id, "rating"));
-    }
-  };
+  // const onRatingDropDownClick = (genre) => {
+  //   if (genre.name == selectedRatingValue) {
+  //     setSelecteRatingValue("Rating");
+  //     router.push(createSearchURL("", "rating"));
+  //   } else {
+  //     setSelecteRatingValue(genre.name);
+  //     router.push(createSearchURL(genre.id, "rating"));
+  //   }
+  // };
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <DropDown
         dropDownValues={data?.genres}
         selectedValue={selectedGenreValue}
         onDropDownClick={onGenreDropDownClick}
       />
-      <DropDown
+      {/* <DropDown
         dropDownValues={ratings}
         selectedValue={selectedRatingValue}
         onDropDownClick={onRatingDropDownClick}
-      />
-    </>
+      /> */}
+    </div>
   );
 };
 

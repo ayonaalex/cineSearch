@@ -1,6 +1,7 @@
 import styles from "./page.module.css";
 import Slider from "@/components/Slider/index";
 import Recommendations from "@/components/Recommendations";
+import Filters from "@/components/Filters/Index";
 
 async function fetchMovies(apiKey: string) {
   const res = await fetch(
