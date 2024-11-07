@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "bun dev",
-    "build": "bun build",
-    "start": "bun start",
-    "lint": "bun lint"
-  },
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },  
   "dependencies": {
     "next": "15.0.2",
     "react": "19.0.0-rc-02c0e824-20241028",
