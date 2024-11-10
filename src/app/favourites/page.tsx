@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useMovieStore } from "../../stores/useMovieStore";
 import styles from "./page.module.css";
 import MovieCard from "@/components/MovieCard";
-import { Movie } from "@/movie";
+import { TMovie } from "@/movie";
 
 export default function FavoritesPage() {
   const [isHydrated, setIsHydrated] = useState(false);
@@ -24,7 +24,7 @@ export default function FavoritesPage() {
       ) : (
         <div className={styles.wrapper}>
           <div className={styles.listWrapper}>
-            {favorites?.map((movie: Movie) => (
+            {favorites?.map((movie: TMovie) => (
               <MovieCard movie={movie} key={movie.id} />
             ))}
           </div>

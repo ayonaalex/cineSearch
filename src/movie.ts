@@ -1,4 +1,4 @@
-export interface Movie {
+export type TMovie = {
     backdrop_path: string;
     id: number;
     title: string;

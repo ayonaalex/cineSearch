@@ -3,18 +3,17 @@ import React from "react";
 import { FiHeart } from "react-icons/fi";
 import styles from "./FavButton.module.css";
 import { useMovieStore } from "../../stores/useMovieStore";
+import { TMovie } from "@/movie";
 
-interface Movie {
-  id: number;
-  title: string;
-  popularity: number;
-}
+export type TFavProps = {
+  movie: TMovie;
+};
 
-const FavoriteButton = ({ movie }: { movie: Movie }) => {
+const FavoriteButton = ({ movie }: TFavProps) => {
   const favorites = useMovieStore((state) => state.favorites);
   const toggleFavorite = useMovieStore((state) => state.toggleFavorite);
 
-  const isFavorite = favorites.some((fav) => fav.id === movie.id);
+  const isFavorite = favorites.some((fav: TMovie) => fav.id === movie.id);
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();

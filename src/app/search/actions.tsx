@@ -1,4 +1,11 @@
 "use server";
+import { TMovie } from "../../movie";
+
+export type TSearchResults = {
+  results: TMovie[];
+  total_pages?: string | null;
+};
+
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 export async function searchMovies(query: string, page: number = 1) {
   const res = await fetch(

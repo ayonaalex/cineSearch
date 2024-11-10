@@ -4,9 +4,13 @@ import styles from "./Slider.module.css";
 import { FaChevronLeft, FaChevronRight, FaRegStar } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
-import { Movie } from "@/movie";
+import { TMovie } from "@/movie";
 
-const Slider = ({ initialMovies }) => {
+export type TSliderprops = {
+  initialMovies: TMovie[];
+};
+
+const Slider = ({ initialMovies }: TSliderprops) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const totalPages = 5;

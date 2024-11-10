@@ -4,8 +4,13 @@ import FavoriteButton from "../FavButton/index";
 import styles from "./MovieCard.module.css";
 import Image from "next/image";
 import { FaRegStar } from "react-icons/fa";
+import { TMovie } from "@/movie";
 
-const MovieCard = ({ movie }) => {
+export type TMovieCardProps = {
+  movie: TMovie;
+};
+
+const MovieCard = ({ movie }: TMovieCardProps) => {
   return (
     <Link
       href={`/moviePage/${movie.id}`}

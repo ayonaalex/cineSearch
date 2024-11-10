@@ -2,21 +2,18 @@
 import React, { useState } from "react";
 import MovieCard from "../../components/MovieCard/index";
 import styles from "./Movielist.module.css";
-import { FaChevronLeft, FaChevronRight, FaRegStar } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { TMovie } from "@/movie";
 
-interface Movie {
-  id: number;
+export type TMovieListProps = {
+  initialMovies: TMovie[];
   title: string;
-  popularity: number;
-}
+};
 
 export default function MovieList({
   initialMovies = [],
   title,
-}: {
-  initialMovies?: Movie[];
-  title: string;
-}) {
+}: TMovieListProps) {
   const [currentPage, setCurrentPage] = useState(0);
   const moviesPerPage = 6;
 

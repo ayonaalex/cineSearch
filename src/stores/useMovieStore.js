@@ -32,7 +32,7 @@ export const useMovieStore = create(
           return { favorites: newFavorites };
         }),
 
-        handleLatest: async (genreId
+        handleLatest: async (
           ) => {
             try {
               const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY; 

@@ -3,11 +3,8 @@ import styles from "./page.module.css";
 import { FaRegStar } from "react-icons/fa";
 
 export type TCommonProps = {
-  params: {
-    movie_id: string;
-  };
+  params: Promise<{ movie_id: string }>;
 };
-
 async function fetchMovies(apiKey: string, movieId: string) {
   const res = await fetch(
     `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`,
@@ -21,7 +18,7 @@ async function fetchMovies(apiKey: string, movieId: string) {
 }
 
 export default async function MovieDetailsPage({ params }: TCommonProps) {
-  const movieId = params.movie_id;
+  const { movie_id: movieId } = await params;
   const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
   try {

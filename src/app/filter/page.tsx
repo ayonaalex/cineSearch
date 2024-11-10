@@ -1,19 +1,21 @@
 import { filterMovies } from "./action";
 import MovieCard from "@/components/MovieCard";
 import styles from "../search/search.module.css";
-import { Movie } from "@/movie";
+import { TMovie } from "@/movie";
 
-interface SearchResults {
-  results: Movie[];
-}
+export type TGenreResults = {
+  results: TMovie[];
+};
 
-export default async function SearchPage({
-  searchParams,
-}: {
-  searchParams: { genre: string };
-}) {
-  const genre = searchParams.genre ?? "";
-  const movies: SearchResults = genre ? await filterMovies(genre) : [];
+export type TGenre = {
+  searchParams: Promise<{ genre: string }>;
+};
+
+export default async function GenreSearchPage({ searchParams }: TGenre) {
+  const { genre } = await searchParams;
+  const movies: TGenreResults = genre
+    ? await filterMovies(genre)
+    : { results: [] };
 
   return (
     <div className={styles.pageWrapper}>
